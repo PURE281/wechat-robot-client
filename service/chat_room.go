@@ -564,7 +564,7 @@ func (s *ChatRoomService) ChatRoomAISummaryByChatRoomID(globalSettings *model.Gl
 		msgService.SendTextMessage(setting.ChatRoomID, "#昨日消息总结\n\n群聊消息总结失败，AI返回结果为空")
 		return nil
 	}
-	replyMsg := fmt.Sprintf("#消息总结\n让我们一起来看看群友们都聊了什么有趣的话题吧~\n\n%s", resp.Choices[0].Message.Content)
+	replyMsg := fmt.Sprintf("#消息总结\n让我们一起来看看包包们都聊了什么有趣的话题吧~\n\n%s", resp.Choices[0].Message.Content)
 	msgService.SendLongTextMessage(setting.ChatRoomID, replyMsg)
 	return nil
 }
@@ -655,11 +655,11 @@ func (s *ChatRoomService) ChatRoomRankingDaily() error {
 				topTenCount += v.Count
 			}
 		}
-		// 计算活跃用户人均消息条数
+		// 计算活跃包包人均消息条数
 		avgMsgCount := int(float64(msgCount) / float64(len(ranks)))
 		// 组装消息总数推送信息
 		notifyMsgs = append(notifyMsgs, " ")
-		notifyMsgs = append(notifyMsgs, fmt.Sprintf("🗣️ 昨日本群 %d 位朋友共产生 %d 条发言", len(ranks), msgCount))
+		notifyMsgs = append(notifyMsgs, fmt.Sprintf("🗣️ 昨日本群 %d 位包包共产生 %d 条发言", len(ranks), msgCount))
 		if showActivity {
 			m := fmt.Sprintf("🎭 活跃度: %s%%，人均消息条数: %d，中位数: %d", activity, avgMsgCount, medianCount)
 			// 计算前十占比
@@ -668,7 +668,7 @@ func (s *ChatRoomService) ChatRoomRankingDaily() error {
 			}
 			notifyMsgs = append(notifyMsgs, m)
 		}
-		notifyMsgs = append(notifyMsgs, "\n🏵 活跃用户排行榜 🏵")
+		notifyMsgs = append(notifyMsgs, "\n🏵 活跃包包排行榜 🏵")
 		notifyMsgs = append(notifyMsgs, " ")
 		for i, r := range ranks {
 			// 只取前十条
@@ -687,7 +687,7 @@ func (s *ChatRoomService) ChatRoomRankingDaily() error {
 			}
 			notifyMsgs = append(notifyMsgs, fmt.Sprintf("%s %s -> %d条", badge, r.ChatRoomMemberNickname, r.Count))
 		}
-		notifyMsgs = append(notifyMsgs, " \n🎉感谢以上群友昨日对群活跃做出的卓越贡献，也请未上榜的群友多多反思。")
+		notifyMsgs = append(notifyMsgs, " \n🎉感谢以上包包昨日对群活跃做出的卓越贡献，也请未上榜的包包多多聊天。")
 		msgService.SendTextMessage(setting.ChatRoomID, strings.Join(notifyMsgs, "\n"))
 		// 发送词云图片
 		wordCloudCacheDir := filepath.Join(string(filepath.Separator), "app", "word_cloud_cache")
@@ -751,11 +751,11 @@ func (s *ChatRoomService) ChatRoomRankingWeekly() error {
 				topTenCount += v.Count
 			}
 		}
-		// 计算活跃用户人均消息条数
+		// 计算活跃包包人均消息条数
 		avgMsgCount := int(float64(msgCount) / float64(len(ranks)))
 		// 组装消息总数推送信息
 		notifyMsgs = append(notifyMsgs, " ")
-		notifyMsgs = append(notifyMsgs, fmt.Sprintf("🗣️ 上周本群 %d 位朋友共产生 %d 条发言", len(ranks), msgCount))
+		notifyMsgs = append(notifyMsgs, fmt.Sprintf("🗣️ 上周本群 %d 位包包共产生 %d 条发言", len(ranks), msgCount))
 		if showActivity {
 			m := fmt.Sprintf("🎭 活跃度: %s%%，人均消息条数: %d，中位数: %d", activity, avgMsgCount, medianCount)
 			// 计算前十占比
@@ -764,7 +764,7 @@ func (s *ChatRoomService) ChatRoomRankingWeekly() error {
 			}
 			notifyMsgs = append(notifyMsgs, m)
 		}
-		notifyMsgs = append(notifyMsgs, "\n🏵 活跃用户排行榜 🏵")
+		notifyMsgs = append(notifyMsgs, "\n🏵 活跃包包排行榜 🏵")
 		notifyMsgs = append(notifyMsgs, " ")
 		for i, r := range ranks {
 			// 只取前十条
@@ -783,7 +783,7 @@ func (s *ChatRoomService) ChatRoomRankingWeekly() error {
 			}
 			notifyMsgs = append(notifyMsgs, fmt.Sprintf("%s %s -> %d条", badge, r.ChatRoomMemberNickname, r.Count))
 		}
-		notifyMsgs = append(notifyMsgs, " \n🎉感谢以上群友上周对群活跃做出的卓越贡献，也请未上榜的群友多多反思。")
+		notifyMsgs = append(notifyMsgs, " \n🎉感谢以上包包上周对群活跃做出的卓越贡献，也请未上榜的包包多多聊天。")
 		msgService.SendTextMessage(setting.ChatRoomID, strings.Join(notifyMsgs, "\n"))
 	}
 	return nil
@@ -832,11 +832,11 @@ func (s *ChatRoomService) ChatRoomRankingMonthly() error {
 				topTenCount += v.Count
 			}
 		}
-		// 计算活跃用户人均消息条数
+		// 计算活跃包包人均消息条数
 		avgMsgCount := int(float64(msgCount) / float64(len(ranks)))
 		// 组装消息总数推送信息
 		notifyMsgs = append(notifyMsgs, " ")
-		notifyMsgs = append(notifyMsgs, fmt.Sprintf("🗣️ %s本群 %d 位朋友共产生 %d 条发言", monthStr, len(ranks), msgCount))
+		notifyMsgs = append(notifyMsgs, fmt.Sprintf("🗣️ %s本群 %d 位包包共产生 %d 条发言", monthStr, len(ranks), msgCount))
 		if showActivity {
 			m := fmt.Sprintf("🎭 活跃度: %s%%，人均消息条数: %d，中位数: %d", activity, avgMsgCount, medianCount)
 			// 计算前十占比
@@ -845,7 +845,7 @@ func (s *ChatRoomService) ChatRoomRankingMonthly() error {
 			}
 			notifyMsgs = append(notifyMsgs, m)
 		}
-		notifyMsgs = append(notifyMsgs, "\n🏵 活跃用户排行榜 🏵")
+		notifyMsgs = append(notifyMsgs, "\n🏵 活跃包包排行榜 🏵")
 		notifyMsgs = append(notifyMsgs, " ")
 		for i, r := range ranks {
 			// 只取前十条
@@ -864,7 +864,7 @@ func (s *ChatRoomService) ChatRoomRankingMonthly() error {
 			}
 			notifyMsgs = append(notifyMsgs, fmt.Sprintf("%s %s -> %d条", badge, r.ChatRoomMemberNickname, r.Count))
 		}
-		notifyMsgs = append(notifyMsgs, fmt.Sprintf(" \n🎉感谢以上群友%s对群活跃做出的卓越贡献，也请未上榜的群友多多反思。", monthStr))
+		notifyMsgs = append(notifyMsgs, fmt.Sprintf(" \n🎉感谢以上包包%s对群活跃做出的卓越贡献，也请未上榜的包包多多聊天。", monthStr))
 		msgService.SendTextMessage(setting.ChatRoomID, strings.Join(notifyMsgs, "\n"))
 	}
 	return nil
